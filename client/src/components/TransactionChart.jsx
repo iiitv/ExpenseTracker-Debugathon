@@ -18,12 +18,13 @@ const TransactionChart = ({chartData}) => {
     return(
       <Typography variant='h4' sx={{ textAlign: 'center', margin: 5 }}>
         Add a transaction to view chart
-      </Typography> 
+      </Typography>
     )
   }
 
     return (
-      <Paper style={{ marginTop: 20, width: '20%' }}>
+      //changed width from 80% to 100%
+      <Paper style={{ marginTop: 20, width: '100%' }}>
         <Chart
           data={chartData}
         >
