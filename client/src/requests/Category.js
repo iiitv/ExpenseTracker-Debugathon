@@ -8,7 +8,7 @@ const headers = (token) => {
 
 const remove = async (catName) => {
   console.log(catName);
-  const token = localStorage.getItem(catName);
+  const token = localStorage.getItem("expenseTrackerToken");
   console.log(`${baseurl}${catName}`);
   const res = await axios.delete(`${baseurl}${catName}`, {
     headers: headers(token),
