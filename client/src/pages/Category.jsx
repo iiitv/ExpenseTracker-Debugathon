@@ -12,16 +12,18 @@ import {setUser} from '../reducers/authReducer'
 import CategoryService from '../requests/Category.js'
 import CategoryForm from '../components/CategoryForm.jsx'
 import { setMessage } from '../reducers/messageReducer';
+import { setTransactions } from "../reducers/transactionReducer.js"
 export default function Category() {
 
   const dispatch = useDispatch()
-
+  const transactions = useSelector(state => state.transactions)
   const categories = useSelector(state=>state.auth.user.categories)
 
   const handleDelete = async (name) => {
     if (confirm("Are you sure you want to delete the category?")){
       const res = await CategoryService.remove(name)
-      // setTransactions(transactions.filter(trans => trans.id != id))
+      console.log(res)
+      setTransactions(transactions.filter(trans => trans.id != id))
       if(res.status===200){
         dispatch(setUser(res.data))
         dispatch(setMessage(['Category deleted successfully',true]))
