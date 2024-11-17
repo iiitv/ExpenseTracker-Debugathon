@@ -23,7 +23,7 @@ const TransactionChart = ({chartData}) => {
   }
 
     return (
-      <Paper style={{ marginTop: 20, width: '20%' }}>
+      <Paper style={{ marginTop: 20, width: '100%' }}>
         <Chart
           data={chartData}
         >
