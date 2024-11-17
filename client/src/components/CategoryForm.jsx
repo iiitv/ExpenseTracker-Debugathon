@@ -22,7 +22,7 @@ const Content = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const res = CategoryService.create({category: name})
+    const res = await CategoryService.create({category: name})
     dispatch(setUser(res.data))
     dispatch(setMessage([`Category '${name}' added successfully`,true]))
     setTimeout(()=>dispatch(setMessage(null)),5000)
