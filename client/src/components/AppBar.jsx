@@ -1,52 +1,47 @@
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { setMessage } from '../reducers/messageReducer';
+import { ArgumentScale, Animation } from '@devexpress/dx-react-chart';
+import { scaleBand } from '@devexpress/dx-chart-core';
 
-const linkStyle = {
-  textDecoration: 'none',
-  color: 'white',
-  cursor: 'pointer'
-}
+import Paper from '@mui/material/Paper';
+import {
+  Chart,
+  BarSeries,
+  ArgumentAxis,
+  ValueAxis,
+  Tooltip,
+} from '@devexpress/dx-react-chart-material-ui';
+import { EventTracker } from '@devexpress/dx-react-chart';
+import { Typography } from '@mui/material';
 
-export default function ButtonAppBar() {
-  const user = useSelector(state => state.auth.user)
-  const dispatch = useDispatch()
+const TransactionChart = ({chartData}) => {
 
-  const logout = () => {
-    localStorage.removeItem('expenseTrackerToken')
-    dispatch(setMessage(['User logged out', true]))
-    setTimeout(() => dispatch(setMessage(null)), 5000)
+  if(!chartData.length>0){
+    return(
+      <Typography variant='h4' sx={{ textAlign: 'center', margin: 5 }}>
+        Add a transaction to view chart
+      </Typography>
+    )
   }
 
-  return (
-    <Box sx={{ flexGrow: 1, width: '30%' }}>
-      <AppBar position="static">
-        <Toolbar>
-          
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <Link style={linkStyle} to='/'>Expense Tracker</Link>
-          </Typography>
+    return (
+      //changed width from 80% to 100%
+      <Paper style={{ marginTop: 20, width: '100%' }}>
+        <Chart
+          data={chartData}
+        >
 
-          {user &&
-          <>
-            <Button color="inherit"><Link style={linkStyle} to='/category'>category</Link></Button>
-            <Button color="inherit" onClick={logout}>Logout</Button>
-          </>
-          }
+          <ArgumentScale factory={scaleBand} />
+          <ArgumentAxis />
+          <ValueAxis />
 
-          {!user && 
-          <>
-          <Button color="inherit"><Link style={linkStyle} to='/login'>Login</Link></Button>
-          <Button color="inherit"><Link style={linkStyle} to='/register'>Register</Link></Button>
-          </>
-          }
-        </Toolbar>
-      </AppBar>
-    </Box>
-  );
+          <BarSeries
+            valueField="Expense"
+            argumentField="Category"
+          />
+          <Animation />
+          <EventTracker/>
+          <Tooltip />
+        </Chart>
+      </Paper>
+    );
 }
+export default TransactionChart
