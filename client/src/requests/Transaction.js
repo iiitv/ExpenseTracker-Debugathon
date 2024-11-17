@@ -24,7 +24,7 @@ const remove = async (id) => {
   console.log(id);
   const token = localStorage.getItem(id);
   console.log(`${baseurl}/transactions${id}`);
-  const res = await axios.delete(`${baseurl}/transactions${id}`, {
+  const res = await axios.delete(`${baseurl}${id}`, {
     headers: headers(token),
   });
   return res;

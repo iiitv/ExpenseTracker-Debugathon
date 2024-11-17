@@ -101,7 +101,9 @@ export default function BasicTable() {
 
                   <IconButton
                     color="error"
-                    onClick={() => handleDelete(row.id)}
+                    onClick={() => {
+                      handleDelete(row.id);
+                    }}
                     sx={{ cursor: "pointer" }}
                   >
                     <DeleteIcon />
