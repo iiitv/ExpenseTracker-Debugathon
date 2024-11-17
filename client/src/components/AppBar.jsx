@@ -6,7 +6,8 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setMessage } from '../reducers/messageReducer';
-
+import { useNavigate } from 'react-router-dom';
+import { removeUser } from '../reducers/authReducer';
 const linkStyle = {
   textDecoration: 'none',
   color: 'white',
@@ -16,15 +17,17 @@ const linkStyle = {
 export default function ButtonAppBar() {
   const user = useSelector(state => state.auth.user)
   const dispatch = useDispatch()
-
+const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem('expenseTrackerToken')
+    dispatch(removeUser());
+    navigate('/login')
     dispatch(setMessage(['User logged out', true]))
     setTimeout(() => dispatch(setMessage(null)), 5000)
   }
 
   return (
-    <Box sx={{ flexGrow: 1, width: '30%' }}>
+    <Box sx={{ flexGrow: 1, width: '100%' }}>
       <AppBar position="static">
         <Toolbar>
           
