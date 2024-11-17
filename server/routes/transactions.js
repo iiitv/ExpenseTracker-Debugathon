@@ -11,14 +11,14 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const newTrans = Transaction({ ...req.body, user: req.user.id })
-  const newT = newTrans.save()
+  const newT = await newTrans.save()
   return res.json(newT)
 })
 
 router.put('/:id', async (req, res) => {
   const id = req.params.id  
   const trans = await Transaction.findById(id)
-  const updatedTrans = await Transaction.findByIdAndUpdate(id, req.body)
+  const updatedTrans = await Transaction.findByIdAndUpdate(id, req.body,{new:true})
   res.json(updatedTrans)
 })
 
