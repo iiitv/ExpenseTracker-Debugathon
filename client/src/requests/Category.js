@@ -10,7 +10,7 @@ const headers = (token)=> {
 const remove = async (catName)=>{
   const token = localStorage.getItem('expenseTrackerToken')
   const res = await axios.delete(baseurl+catName,{headers:headers(token)})
-  return res
+  res.status(200).json({message: "Successfully Registered", status: 200})
 }
 const create = async (catName)=>{
   const token = localStorage.getItem('expenseTrackerToken')
