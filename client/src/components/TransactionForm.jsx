@@ -11,7 +11,7 @@ import dayjs from 'dayjs';
 import { useDispatch, useSelector } from 'react-redux';
 import { setEditTransaction } from '../reducers/editTransactionReducer'
 import { setMessage } from '../reducers/messageReducer'
-
+import { addTransaction,setTransactions } from '../reducers/transactionReducer';
 const Content = () => {
 
   const categories = useSelector(state => state.auth.user.categories)
@@ -43,7 +43,8 @@ const Content = () => {
     e.preventDefault()
 
     if (!editTransaction) {
-      await TransactionService.create(form)
+      const abc=await TransactionService.create(form)
+      dispatch(addTransaction(abc))
       setForm(initialForm)
       dispatch(setMessage(['Expense added successfully', true]))
 
@@ -51,7 +52,8 @@ const Content = () => {
       const res = await TransactionService.update(form)
       dispatch(setEditTransaction(null))
       setForm(initialForm)
-      transactions.map(trans => trans.id === res.id ? res : trans)
+      const abc=transactions.map(trans => trans.id === res.id ? res : trans)
+      dispatch(setTransactions(abc))
       dispatch(setMessage(['Expense updated successfully', true]))
     }
 

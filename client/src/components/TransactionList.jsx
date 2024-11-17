@@ -80,7 +80,7 @@ export default function BasicTable() {
                   <IconButton
                     color='primary'
                     sx={{ marginLeft: 1, cursor: 'pointer' }}
-                    onClick={()=>handleEdit()}
+                    onClick={()=>handleEdit(row)}
                     > 
                     <EditIcon/>
                   </IconButton>
