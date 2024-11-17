@@ -22,7 +22,7 @@ export default function Category() {
     if (confirm("Are you sure you want to delete the category?")){
       const res = await CategoryService.remove(name)
       // setTransactions(transactions.filter(trans => trans.id != id))
-      if(res.status===200){
+      if(res.status==200){
         dispatch(setUser(res.data))
         dispatch(setMessage(['Category deleted successfully',true]))
         setTimeout(()=>dispatch(setMessage(null)),5000)
